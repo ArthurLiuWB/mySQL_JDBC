@@ -3,6 +3,7 @@ package com.wenbo.jdbc;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.logging.Logger;
 
 import org.junit.Test;
 
@@ -24,6 +25,14 @@ public class JDBC {
 		String password = "wenbomysql2017";
 		Connection conn = DriverManager.getConnection(url, userName, password);
 		System.out.println(conn);
+		try {
+			conn.setAutoCommit(false);
+			
+			conn.commit();
+		} catch(Exception e) {
+			conn.rollback();
+			e.printStackTrace();
+		}
 		
 	}
 }
